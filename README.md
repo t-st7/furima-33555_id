@@ -35,7 +35,7 @@
 
 ### Association
 - belongs_to :users
-- has_one    :purchases
+- has_one    :purchase
 
 ## purchases テーブル
 |Column      |Type        |Options                                 |
@@ -47,7 +47,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :addresses
+- has_one :address
 
 ## addresses テーブル
 |Column                |Type        |Options                         |
@@ -58,7 +58,7 @@
 | address_line         | string     | null: false                    |
 | address_line_second  | string     |                                |
 | phone_number         | string     | null: false                    |
-| item_id              | references | null: false, foreign_key: true |
+| purchase             | references | null: false, foreign_key: true |
 
 ### Association
 
