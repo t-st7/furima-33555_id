@@ -1,24 +1,59 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## users テーブル
+| Column     | Type   | Options      |
+| ---------- | ------ | ------------ |
+| nickname   | string | null: false  |
+| email      | string | unique: true |
+| password   | string | null: false  |
+| name       | string | null: false  |
+| furigana   | string | null: false  |
 
-* Ruby version
+### Association
+- has_many :items
+- has_many :purchases
+- has_one  :addresses
 
-* System dependencies
 
-* Configuration
+## items テーブル
+|Column           |Type       |Options                           |
+| --------------- | ---------- | ------------------------------- |
+| product         | string     | null: false                     |
+| description     | text       | null: false                     |
+| category        | references | null: false, foreign_key: true  |
+| delivery_charge | references | null: false, foreign_key: true  |
+| region          | references | null: false, foreign_key: true  |
+| condition       | references | null: false, foreign_key: true  |
+| days            | references | null: false, foreign_key: true  |
+| price           | integer    | null: false                     |
+| user            | references | null: false, foreign_key: true  |
 
-* Database creation
 
-* Database initialization
+### Association
+- belongs_to :users
+- has_one    :purchases
 
-* How to run the test suite
+## purchases テーブル
+|Column      |Type   |Options                                 |
+| ---------  |-------|--------------------------------------- |
+| user       | references | null: false, foreign_key: true    |
+| items      | references | null: false, foreign_key: true    |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
+- belongs_to :users
+- belongs_to :items
+- has_one :addresses
 
-* ...
+## addresses テーブル
+|Column      |Type        |Options                         |
+| ---------  |----------- |------------------------------- |
+| address    | string     | null: false                    |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :users
+- belongs_to :purchases
