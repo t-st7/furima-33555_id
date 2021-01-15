@@ -63,3 +63,7 @@
 ### Association
 
 - belongs_to :purchase
+
+### コピペ用
+
+- nickname:, email:, password: "000000", password_confirmation: "000000", last_name:, first_name:, kana_last_name:, kana_first_name:, birthday:
