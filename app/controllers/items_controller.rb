@@ -1,22 +1,24 @@
 class ItemsController < ApplicationController
-  before_action :move_to_sign_in, only: [:new]
+  before_action :authenticate_user!, only: :new
+
   def index
   end
 
   def new
+    @item = Item.new
   end
 
   def create
+    if @item.save
+      redirect_to root_path
+    else
+      render new_item_path
+    end
   end
 
   private
   def item_params
-    require.params(:item).permit(:product, :description, :category_id, :delivery_charge_id, :state_id, :condition_id, :days_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:product, :description, :category_id, :delivery_charge_id, :state_id, :condition_id, :day_to_ship_id, :price, :image).merge(user_id: current_user.id)
   end
 
-  def move_to_sign_in
-    unless user_signed_in? 
-      redirect_to user_session_path
-    end
-  end
 end
