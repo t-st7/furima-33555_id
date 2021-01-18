@@ -37,7 +37,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Condition is not a number')
       end
 
-      it '配送料の負担についての、、情報が選択されていないと出品出来ない。' do
+      it '配送料の負担についての、情報が選択されていないと出品出来ない。' do
         @item.delivery_charge_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('Delivery charge is not a number')
