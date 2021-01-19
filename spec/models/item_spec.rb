@@ -55,31 +55,31 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Day to ship is not a number')
       end
 
-      it '各ActiveHashのidが1の時保存できないこと(カテゴリー)' do
+      it 'ActiveHashのidが1の時保存できないこと(カテゴリー)' do
         @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
-      it '各ActiveHashのidが1の時保存できないこと(商品の状態)' do
+      it 'ActiveHashのidが1の時保存できないこと(商品の状態)' do
         @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
 
-      it '各ActiveHashのidが1の時保存できないこと(配送料の負担)' do
+      it 'ActiveHashのidが1の時保存できないこと(配送料の負担)' do
         @item.delivery_charge_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Delivery charge must be other than 1')
       end
 
-      it '各ActiveHashのidが1の時保存できないこと(発送までの日数)' do
+      it 'ActiveHashのidが1の時保存できないこと(発送までの日数)' do
         @item.day_to_ship_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Day to ship must be other than 1')
       end
 
-      it '各ActiveHashのidが0の時保存できないこと(stateの時)' do
+      it 'ActiveHashのidが0の時保存できないこと(stateの時)' do
         @item.state_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('State must be other than 0')
