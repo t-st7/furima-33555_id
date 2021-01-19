@@ -3,7 +3,11 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category, :delivery_charge, :condition, :day_to_ship, :state
+  belongs_to_active_hash :category
+  belongs_to_active_hash :delivery_charge
+  belongs_to_active_hash :condition
+  belongs_to_active_hash :day_to_ship
+  belongs_to_active_hash :state
 
   with_options presence: true do
     validates :product
