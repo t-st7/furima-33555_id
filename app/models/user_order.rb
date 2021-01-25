@@ -1,6 +1,6 @@
 class UserOrder
   include ActiveModel::Model
-  attr_accessor :zip, :state, :city, :adress_line, :address_line_second, :phone_number
+  attr_accessor :zip, :state_id, :city, :address_line, :address_line_second, :phone_number, :user_id, :item_id, :order_id
 
   with_options presence: true do
     validates :zip, format: {with: /\A\d{3}[-]\d{4}\z/}
@@ -11,8 +11,8 @@ class UserOrder
   end
 
   def save
-    Order.create( item_id: item_id, address_id: address_id)
+    order = Order.create( item_id: item_id, user_id: user_id)
 
-    Address.create( zip: zip, state_id: state_id, city: city, address_line: adress_line, address_line_second: address_line_second, phone_number: phone_number)
+    Address.create( zip: zip, state_id: state_id, city: city, address_line: address_line, address_line_second: address_line_second, phone_number: phone_number, order_id: order.id)
   end
 end

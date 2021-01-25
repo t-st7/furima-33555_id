@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2021_01_22_134550) do
     t.string "zip", null: false
     t.integer "state_id", null: false
     t.string "city", null: false
-    t.string "adress_line", null: false
-    t.string "adress_line_second"
+    t.string "address_line", null: false
+    t.string "address_line_second"
     t.string "phone_number", null: false
     t.bigint "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
