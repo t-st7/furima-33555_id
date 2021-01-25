@@ -1,6 +1,6 @@
 class UserOrder
   include ActiveModel::Model
-  attr_accessor :zip, :state_id, :city, :address_line, :address_line_second, :phone_number, :user_id, :item_id, :order_id
+  attr_accessor :zip, :state_id, :city, :address_line, :address_line_second, :phone_number, :user_id, :item_id, :order_id, :token, :price
 
   with_options presence: true do
     validates :zip, format: {with: /\A\d{3}[-]\d{4}\z/}
@@ -8,6 +8,8 @@ class UserOrder
     validates :city
     validates :address_line
     validates :phone_number, format: {with: /\A\d{11}\z/}
+    validates :token
+    validates :price
   end
 
   def save

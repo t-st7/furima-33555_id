@@ -61,6 +61,17 @@ RSpec.describe UserOrder, type: :model do
         expect(@user_order.errors.full_messages).to include("Phone number is invalid")
       end
 
+      it "priceが空では登録できないこと" do
+        @user_order.price = nil
+        @user_order.valid?
+        expect(@user_order.errors.full_messages).to include("Price can't be blank")
+      end
+    
+      it "tokenが空では登録できないこと" do
+        @user_order.token = nil
+        @user_order.valid?
+        expect(@user_order.errors.full_messages).to include("Token can't be blank")
+      end
     end
 
     context '購入できる時' do
