@@ -26,13 +26,13 @@ RSpec.describe UserOrder, type: :model do
       end
 
       it '番地が空だと購入できない' do
-        @user_order.address_line  = nil
+        @user_order.address_line = nil
         @user_order.valid?
         expect(@user_order.errors.full_messages).to include("Address line can't be blank")
       end
 
       it '電話番号が空だと購入できない' do
-        @user_order.phone_number  = nil
+        @user_order.phone_number = nil
         @user_order.valid?
         expect(@user_order.errors.full_messages).to include("Phone number can't be blank")
       end
@@ -40,34 +40,34 @@ RSpec.describe UserOrder, type: :model do
       it '郵便番号にハイフンが無いと購入できない' do
         @user_order.zip = '1234567'
         @user_order.valid?
-        expect(@user_order.errors.full_messages).to include("Zip is invalid")
+        expect(@user_order.errors.full_messages).to include('Zip is invalid')
       end
 
       it '電話番号にハイフンがあると購入できない' do
-        @user_order.phone_number  = '090-1234-5678'
+        @user_order.phone_number = '090-1234-5678'
         @user_order.valid?
-        expect(@user_order.errors.full_messages).to include("Phone number is invalid")
+        expect(@user_order.errors.full_messages).to include('Phone number is invalid')
       end
 
       it '電話番号が11桁じゃないと購入できない(12以上)' do
-        @user_order.phone_number  = '090123456789'
+        @user_order.phone_number = '090123456789'
         @user_order.valid?
-        expect(@user_order.errors.full_messages).to include("Phone number is invalid")
+        expect(@user_order.errors.full_messages).to include('Phone number is invalid')
       end
 
       it '電話番号が11桁じゃないと購入できない(10以下)' do
-        @user_order.phone_number  = '090123'
+        @user_order.phone_number = '090123'
         @user_order.valid?
-        expect(@user_order.errors.full_messages).to include("Phone number is invalid")
+        expect(@user_order.errors.full_messages).to include('Phone number is invalid')
       end
 
-      it "priceが空では登録できないこと" do
+      it 'priceが空では登録できないこと' do
         @user_order.price = nil
         @user_order.valid?
         expect(@user_order.errors.full_messages).to include("Price can't be blank")
       end
-    
-      it "tokenが空では登録できないこと" do
+
+      it 'tokenが空では登録できないこと' do
         @user_order.token = nil
         @user_order.valid?
         expect(@user_order.errors.full_messages).to include("Token can't be blank")
@@ -78,7 +78,6 @@ RSpec.describe UserOrder, type: :model do
       it '必要な情報を適切に入力すると、商品の購入ができること' do
         expect(@user_order).to be_valid
       end
-
     end
   end
 end
