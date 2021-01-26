@@ -61,10 +61,10 @@ RSpec.describe UserOrder, type: :model do
         expect(@user_order.errors.full_messages).to include('Phone number is invalid')
       end
 
-      it 'priceが空では登録できないこと' do
-        @user_order.price = nil
+      it '電話番号に数字以外が混じっていると購入できない' do
+        @user_order.phone_number = '090aiueoaiu'
         @user_order.valid?
-        expect(@user_order.errors.full_messages).to include("Price can't be blank")
+        expect(@user_order.errors.full_messages).to include('Phone number is invalid')
       end
 
       it 'tokenが空では登録できないこと' do
@@ -72,12 +72,33 @@ RSpec.describe UserOrder, type: :model do
         @user_order.valid?
         expect(@user_order.errors.full_messages).to include("Token can't be blank")
       end
+
+      it 'user_idが空では登録できないこと' do
+        @user_order.user_id = nil
+        @user_order.valid?
+        expect(@user_order.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空では登録できないこと' do
+        @user_order.item_id = nil
+        @user_order.valid?
+        expect(@user_order.errors.full_messages).to include("Item can't be blank")
+      end
     end
+
+
 
     context '購入できる時' do
       it '必要な情報を適切に入力すると、商品の購入ができること' do
         expect(@user_order).to be_valid
       end
+
+      it '建物名がなくても、商品の購入ができること' do
+        @user_order.address_line_second = nil
+        expect(@user_order).to be_valid
+      end
+
+
     end
   end
 end
