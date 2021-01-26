@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :move_to_index, only: [:edit, :destroy]
 
   def index
-    @items = Item.includes(:user).order(created_at: :DESC)
+    @items = Item.includes(:user, :order).order(created_at: :DESC)
   end
 
   def new
@@ -51,8 +51,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in? && current_user.id == @item.user_id
-    redirect_to action :index 
+    unless user_signed_in? && current_user.id == @item.user_id && @item.order.blank?
+    redirect_to action: :index 
     end
   end
 end
