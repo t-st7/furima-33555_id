@@ -22,6 +22,12 @@ RSpec.describe UserOrder, type: :model do
         expect(@user_order.errors.full_messages).to include("State can't be blank")
       end
 
+      it '都道府県が空だと購入できない' do
+        @user_order.state_id = 0
+        @user_order.valid?
+        expect(@user_order.errors.full_messages).to include("State must be other than 0")
+      end
+
       it '市区町村が空だと購入できない' do
         @user_order.city = nil
         @user_order.valid?
