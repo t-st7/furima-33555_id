@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe UserOrder, type: :model do
   before do
-    @user =FactoryBot.create(:user)
-    @item =FactoryBot.create(:item)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
     @user_order = FactoryBot.build(:user_order, user_id: @user.id, item_id: @item.id)
     sleep 0.1
   end
@@ -89,8 +89,6 @@ RSpec.describe UserOrder, type: :model do
       end
     end
 
-
-
     context '購入できる時' do
       it '必要な情報を適切に入力すると、商品の購入ができること' do
         expect(@user_order).to be_valid
@@ -100,8 +98,6 @@ RSpec.describe UserOrder, type: :model do
         @user_order.address_line_second = nil
         expect(@user_order).to be_valid
       end
-
-
     end
   end
 end

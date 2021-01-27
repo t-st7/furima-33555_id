@@ -27,16 +27,12 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:user_order).permit(:zip, :state_id, :city, :address_line, :address_line_second, :phone_number).merge(
-      user_id: current_user.id, item_id: params[:item_id],token: params[:token]
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
     )
   end
 
   def move_to_index
-    if @item.order.present?
-      redirect_to root_path 
-    elsif  current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.order.present? || current_user.id == @item.user_id
   end
 
   def pay_item
